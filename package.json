@@ -25,6 +25,8 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "@mdi/js": "^7.0.96",
+    "@mdi/react": "^1.6.1",
     "acorn": "^8.8.0",
     "acorn-import-assertions": "^1.8.0",
     "ajv": "^6.12.6",
