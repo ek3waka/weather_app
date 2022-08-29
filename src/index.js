@@ -1,5 +1,7 @@
 import './style.css'
 import Magnifier from './Icons/magnify.svg'
+import { WeatherReport } from './Items modules/createWeatherReport'
+import { ShowWeatherReport } from './DOM modules/showWeatherReportCard'
 
 const body = document.querySelector('body')
 
@@ -59,18 +61,131 @@ header.append(searchField)
 
 
 
+
+
+
+/* const weatherForecastHeader = document.createElement('h1')
+weatherForecastHeader.classList.add('weather-forecast-header')
+weatherForecastHeader.textContent = 'Daily forecast'
+
+const weatherForecastContainer = document.createElement('div')
+weatherForecastContainer.classList.add('weather-forecast-container') */
+    
+/* const weatherForecastItem = document.createElement('div')
+weatherForecastItem.classList.add('weather-forecast-item')
+const weatherForecastItemHeader = document.createElement('div')
+weatherForecastItemHeader.classList.add('weather-forecast-item-header')
+const weatherForecastItemHeaderDay = document.createElement('div')
+weatherForecastItemHeaderDay.classList.add('weather-forecast-item-header-day')
+weatherForecastItemHeaderDay.textContent = 'Sat'             
+const weatherForecastItemHeaderDate = document.createElement('div')
+weatherForecastItemHeaderDate.classList.add('weather-forecast-item-header-date')
+weatherForecastItemHeaderDate.textContent = '27 aug'
+
+weatherForecastItemHeader.append(weatherForecastItemHeaderDay, weatherForecastItemHeaderDate) */
+
+const weatherForecastItemIcon = document.createElement('img')
+/* weatherForecastItemIcon.src = `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png` */
+
+/* const weatherForecastItemTemperatureContainer = document.createElement('div')
+weatherForecastItemTemperatureContainer.classList.add('weather-forecast-item-temperature-container')
+
+const weatherForecastItemTemperatureDay = document.createElement('div')
+weatherForecastItemTemperatureDay.classList.add('weather-forecast-item-temperature-primal')
+weatherForecastItemTemperatureDay.textContent = '19°'
+
+const weatherForecastItemTemperatureNight = document.createElement('div')
+weatherForecastItemTemperatureNight.classList.add('weather-forecast-item-temperature-secondary')
+weatherForecastItemTemperatureNight.textContent = '12°'
+
+weatherForecastItemTemperatureContainer.append(weatherForecastItemTemperatureDay, weatherForecastItemTemperatureNight)
+
+
+const weatherForecastItemText = document.createElement('div')
+weatherForecastItemText.classList.add('weather-forecast-item-text')
+weatherForecastItemText.textContent = 'Party cloudy'
+
+ */
+/* 
+
+weatherForecastItem.append(weatherForecastItemHeader, 
+  weatherForecastItemIcon, 
+  weatherForecastItemTemperatureContainer, 
+  weatherForecastItemText) */
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+/*     const weatherForecastItem2 = document.createElement('div')
+    weatherForecastItem2.classList.add('weather-forecast-item')
+    
+    const weatherForecastItem3 = document.createElement('div')
+    weatherForecastItem3.classList.add('weather-forecast-item')
+    
+    const weatherForecastItem4 = document.createElement('div')
+    weatherForecastItem4.classList.add('weather-forecast-item')
+
+    const weatherForecastItem5 = document.createElement('div')
+    weatherForecastItem5.classList.add('weather-forecast-item')
+
+    const weatherForecastItem6 = document.createElement('div')
+    weatherForecastItem6.classList.add('weather-forecast-item')
+
+    const weatherForecastItem7 = document.createElement('div')
+    weatherForecastItem7.classList.add('weather-forecast-item')
+    
+    weatherForecastContainer.append(weatherForecastItem, 
+      weatherForecastItem2, 
+      weatherForecastItem3, 
+      weatherForecastItem4, 
+      weatherForecastItem5, 
+      weatherForecastItem6, 
+      weatherForecastItem7) */
+
+
+/* main.append(weatherReportCard, weatherForecastHeader, weatherForecastContainer) */
+
+
+
+
 fetch('http://api.openweathermap.org/data/2.5/weather?lat=59.9386&lon=30.3141&appid=5efcd16ebd2a5605a8bebd21397f317e&units=metric', {
     })
     .then(function(response) {
             return response.json();
-            })
+    })
     .then(function(response) {
-            console.log(response)
-            
-            
-            })
-
-
-
-
-
+          console.log(response)
+          const weatherReportCard = new WeatherReport('Saint-Petersburg', 
+                                    response.main.temp, 
+                                    response.weather[0].main, 
+                                    response.main.feels_like,
+                                    response.main.pressure,
+                                    response.wind.speed,
+                                    response.main.humidity,
+                                    response.weather[0].icon)                        
+          const weatherReport = new ShowWeatherReport().DOM(weatherReportCard)
+          main.append(weatherReport)
+    })
+/* 
+fetch('http://api.openweathermap.org/data/2.5/forecast?lat=59.9386&lon=30.3141&appid=5efcd16ebd2a5605a8bebd21397f317e&units=metric', {
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(response) {
+        return console.log(response)
+    }) */
