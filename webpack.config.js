@@ -17,6 +17,9 @@ module.exports = {
     clean: true,
   },
   resolve: {
+    alias: {
+      images: path.resolve(__dirname, './src/Images/'),
+    },
     extensions: ['.js', '.ts']
   },
   module: {
@@ -26,7 +29,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: 'asset/resource',
       },
     ],
