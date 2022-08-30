@@ -59,8 +59,23 @@ searchField.append(searchInput, searchButton)
 header.append(searchField)
 
 
+const defaultCity = 'Saint-Petersburg'
 
 
+function success(pos) {
+  var crd = pos.coords;
+
+  console.log('Ваше текущее местоположение:');
+  console.log(`Широта: ${crd.latitude}`);
+  console.log(`Долгота: ${crd.longitude}`);
+  console.log(`Плюс-минус ${crd.accuracy} метров.`);
+};
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+};
+
+navigator.geolocation.getCurrentPosition(success, error);
 
 
 
@@ -84,7 +99,7 @@ weatherForecastItemHeaderDate.textContent = '27 aug'
 
 weatherForecastItemHeader.append(weatherForecastItemHeaderDay, weatherForecastItemHeaderDate) */
 
-const weatherForecastItemIcon = document.createElement('img')
+/* const weatherForecastItemIcon = document.createElement('img') */
 /* weatherForecastItemIcon.src = `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png` */
 
 /* const weatherForecastItemTemperatureContainer = document.createElement('div')
@@ -169,7 +184,7 @@ fetch('http://api.openweathermap.org/data/2.5/weather?lat=59.9386&lon=30.3141&ap
     })
     .then(function(response) {
           console.log(response)
-          const weatherReportCard = new WeatherReport('Saint-Petersburg', 
+          const weatherReportCard = new WeatherReport(defaultCity, 
                                     response.main.temp, 
                                     response.weather[0].main, 
                                     response.main.feels_like,

@@ -68,7 +68,6 @@ body {
     justify-content: center;
     align-items: stretch;
     position: relative;
-    background: url('./Images/clouds.jpg');
 }
 
 header {
@@ -185,23 +184,6 @@ footer {
     font-size: 3rem;
 }
 
-.weather-report-card-description-button-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.weather-report-card-description-button {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: white;
-    cursor: pointer;
-}
-
-.weather-report-card-description-button:hover, .weather-report-card-description-button:focus {
-    color: rgb(50, 111, 145);
-    font-weight: bolder;
-}
 
 .weather-report-card-text {
     font-size: 1.2rem;
@@ -220,9 +202,8 @@ footer {
     align-items: center;
 }
 
-
-.sunny {
-    fill: #fc9700;
+.weather-report-card-img {
+    scale: 1.3;
 }
 
 .weather-forecast-header {

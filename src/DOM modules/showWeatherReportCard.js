@@ -1,6 +1,8 @@
-//менять wrapper background image
 class ShowWeatherReport {
     DOM(weatherReport) {
+        const wrapper = document.querySelector('.wrapper')
+        wrapper.style.background = `url('../src/Images/${weatherReport.description}.jpg')`
+
         const weatherReportCard = document.createElement('div')
         weatherReportCard.classList.add('weather-report-card')
 
@@ -12,6 +14,7 @@ class ShowWeatherReport {
         weatherReportCardDescription.classList.add('weather-report-card-description')
         const weatherReportCardDescriptionIcon = document.createElement('img')
         weatherReportCardDescriptionIcon.src = `http://openweathermap.org/img/wn/${weatherReport.icon}.png`
+        weatherReportCardDescriptionIcon.classList.add('weather-report-card-img')
 
         const weatherReportCardDescriptionTemperature = document.createElement('div')
         weatherReportCardDescriptionTemperature.classList.add('weather-report-card-description-temperature')
