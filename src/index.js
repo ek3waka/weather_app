@@ -60,22 +60,10 @@ header.append(searchField)
 
 
 const defaultCity = 'Saint-Petersburg'
+/* let defaultLatitude = 
+let defaultLongitude =  */
 
 
-function success(pos) {
-  var crd = pos.coords;
-
-  console.log('Ваше текущее местоположение:');
-  console.log(`Широта: ${crd.latitude}`);
-  console.log(`Долгота: ${crd.longitude}`);
-  console.log(`Плюс-минус ${crd.accuracy} метров.`);
-};
-
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-};
-
-navigator.geolocation.getCurrentPosition(success, error);
 
 
 
@@ -175,16 +163,48 @@ weatherForecastItem.append(weatherForecastItemHeader,
 /* main.append(weatherReportCard, weatherForecastHeader, weatherForecastContainer) */
 
 
+function success(pos) {
+  const crd = pos.coords
+  getCurrentWeatherReport(crd.latitude, crd.longitude)
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`)
+}
+
+navigator.geolocation.getCurrentPosition(success, error)
 
 
-fetch('http://api.openweathermap.org/data/2.5/weather?lat=59.9386&lon=30.3141&appid=5efcd16ebd2a5605a8bebd21397f317e&units=metric', {
+
+
+async function getCurrentWeatherReport(latitude, longitude, apikey = '5efcd16ebd2a5605a8bebd21397f317e') {
+  let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}&units=metric`)
+  let responseJSON = await response.json()
+  
+  const weatherReportCard = new WeatherReport(responseJSON.name, 
+                                              responseJSON.main.temp, 
+                                              responseJSON.weather[0].main, 
+                                              responseJSON.main.feels_like,
+                                              responseJSON.main.pressure,
+                                              responseJSON.wind.speed,
+                                              responseJSON.main.humidity,
+                                              responseJSON.weather[0].icon)                        
+  const weatherReport = new ShowWeatherReport().DOM(weatherReportCard)
+  main.append(weatherReport)
+}
+
+
+
+
+
+/* fetch('http://api.openweathermap.org/data/2.5/weather?lat=59.8322&lon=30.2278&appid=5efcd16ebd2a5605a8bebd21397f317e&units=metric', {
     })
     .then(function(response) {
             return response.json();
     })
     .then(function(response) {
           console.log(response)
-          const weatherReportCard = new WeatherReport(defaultCity, 
+          const weatherReportCard = new WeatherReport(response.name, 
                                     response.main.temp, 
                                     response.weather[0].main, 
                                     response.main.feels_like,
@@ -194,13 +214,14 @@ fetch('http://api.openweathermap.org/data/2.5/weather?lat=59.9386&lon=30.3141&ap
                                     response.weather[0].icon)                        
           const weatherReport = new ShowWeatherReport().DOM(weatherReportCard)
           main.append(weatherReport)
-    })
-/* 
-fetch('http://api.openweathermap.org/data/2.5/forecast?lat=59.9386&lon=30.3141&appid=5efcd16ebd2a5605a8bebd21397f317e&units=metric', {
+    }) */
+
+fetch('http://api.openweathermap.org/data/2.5/forecast?lat=59.8322&lon=30.2278&appid=5efcd16ebd2a5605a8bebd21397f317e&units=metric', {
     })
     .then(function(response) {
         return response.json();
     })
     .then(function(response) {
         return console.log(response)
-    }) */
+    }) 
+
