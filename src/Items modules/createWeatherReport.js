@@ -6,7 +6,8 @@ class WeatherReport {
                 pressure, 
                 wind, 
                 humidity, 
-                icon) {
+                icon) 
+    {
         this.city = city
         this.temperature = temperature
         this.description = description
@@ -21,7 +22,7 @@ class WeatherReport {
 export {WeatherReport}
 
 
-
+//city = response.name
 //description = response.weather[0].main
 //temp = response.main.temp
 //feels = response.main.feels_like
@@ -29,5 +30,6 @@ export {WeatherReport}
 //humidity = response.main.humidity
 //wind = response.wind.speed
 //iconsrc = response.weather[0].icon
+
 
 
