@@ -13,3 +13,5 @@ class WeatherDailyForecastItem {
     }
 
 }
+
+export {WeatherDailyForecastItem}

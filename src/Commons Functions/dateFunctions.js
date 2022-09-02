@@ -10,6 +10,15 @@ function convertDateToTxt(date) {
     return `${date.getFullYear()}-${month}-${day}`
 }
 
+function convertTxtToDate(textDate) {
+    const date = new Date(textDate)
+
+}
 
 
-export {convertDateToTxt}
+function getWeekDay(date) {
+    let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    return days[date.getDay()]
+  }
+
+export {convertDateToTxt, convertTxtToDate, getWeekDay}
