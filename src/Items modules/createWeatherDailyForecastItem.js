@@ -1,15 +1,17 @@
 class WeatherDailyForecastItem {
-    constructor(maxTemperature, 
-                minTemperature, 
-                description, 
-                date,
+    constructor(date, 
+                tempMin, 
+                weekday, 
+                tempMax,
+                description,
                 icon) 
     {
-        this.maxTemperature = maxTemperature
-        this.minTemperature = minTemperature
-        this.description = description
         this.date = date
-        this.date = icon
+        this.minTemperature = tempMin
+        this.weekday = weekday
+        this.maxTemperature = tempMax       
+        this.description = description
+        this.icon = icon
     }
 
 }
