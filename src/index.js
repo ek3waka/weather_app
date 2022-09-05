@@ -58,25 +58,42 @@ searchButtonIconImg.setAttribute(
 searchButtonIcon.append(searchButtonIconImg);
 searchButton.append(searchButtonIcon);
 
-searchButton.addEventListener('click', requestCityWeather())
+searchButton.addEventListener('click', () => {
+  requestCityWeather(searchInput.value)
+})
 
 
 searchField.append(searchInput, searchButton)
 
 header.append(searchField)
 
-function requestCityWeather() {
-
+async function requestCityWeather(city, apikey = '5efcd16ebd2a5605a8bebd21397f317e') {
+  let response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apikey}`)
+  let responseJSON = await response.json()
+  let responceLatitude = responseJSON[0].lat
+  let responceLongitude = responseJSON[0].lon 
+  console.log(responceLatitude, responceLongitude)
+  while (main.firstChild) {
+  main.removeChild(main.firstChild);
+}  
+  getCurrentWeatherReport(responceLatitude, responceLongitude)
+  getDailyForecast(responceLatitude, responceLongitude)
 }
 
 function success(pos) {
   const crd = pos.coords
   getCurrentWeatherReport(crd.latitude, crd.longitude)
+  getDailyForecast(crd.latitude, crd.longitude)
 }
 
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`)
+const defaultLatitude = 55.7504461
+const defaultLongitude = 37.6174943
+
+function error() {
+  getCurrentWeatherReport(defaultLatitude, defaultLongitude)
+  getDailyForecast(defaultLatitude, defaultLongitude)
 }
+
 
 navigator.geolocation.getCurrentPosition(success, error)
 
@@ -142,49 +159,3 @@ async function getDailyForecast (latitude, longitude, apikey = '5efcd16ebd2a5605
           container.append(showForecastItem)
         }
 }
-
-fetch('http://api.openweathermap.org/data/2.5/forecast?lat=59.8322&lon=30.2278&appid=5efcd16ebd2a5605a8bebd21397f317e&units=metric', {
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(response) {
-        const weatherForecast = []
-        for (let item of response.list) {
-          for (let key in item) {
-            if (key == 'dt_txt' && item[key].includes('00:00:00')) {
-                const night = {}
-                let date = new Date(item[key].slice(0,10))
-                let weekDay = getWeekDay(date)
-                let month = date.toLocaleString("en-us", { month: "short" })
-                night.date = `${date.getDate()} ${month}`
-                night.tempMin = item.main.temp_min
-                night.weekday = weekDay
-                weatherForecast.push(night)
-            }
-            if (key == 'dt_txt' && item[key].includes('12:00:00')) {
-                const day = {}
-                day.tempMax = item.main.temp_max
-                day.description = `${item.weather[0].main}`
-                day.icon = `${item.weather[0].icon}`   
-                weatherForecast.push(day)
-            }
-          } 
-        } 
-        const arr = []
-        const wrapper = new ShowForecastContainer().DOM()
-        main.append(wrapper)
-        const container = document.querySelector('.weather-forecast-container')
-        for (let i=0; i<weatherForecast.length - 1; i+=2) {
-          const obj = Object.assign(weatherForecast[i], weatherForecast[i+1])
-          arr.push(obj)
-          const forecastItem = new WeatherDailyForecastItem(obj.date, 
-                                                            obj.tempMin, 
-                                                            obj.weekday, 
-                                                            obj.tempMax,
-                                                            obj.description,
-                                                            obj.icon)
-          const showForecastItem = new ShowForecastItem().createItemDOM(forecastItem)
-          container.append(showForecastItem)
-        }
-      })
