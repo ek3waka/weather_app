@@ -14,7 +14,7 @@ class ShowForecastItem {
             weatherForecastItemHeader.append(weatherForecastItemHeaderDay, weatherForecastItemHeaderDate) 
 
             const weatherForecastItemIcon = document.createElement('img') 
-            weatherForecastItemIcon.src = `http://openweathermap.org/img/wn/${forecastItem.icon}@2x.png` 
+            weatherForecastItemIcon.src = `https://openweathermap.org/img/wn/${forecastItem.icon}@2x.png` 
             weatherForecastItemIcon.classList.add('weather-forecast-img')
 
             const weatherForecastItemTemperatureContainer = document.createElement('div')

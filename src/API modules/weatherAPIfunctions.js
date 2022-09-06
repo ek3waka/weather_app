@@ -10,7 +10,7 @@ const defaultLatitude = 55.7504461
 const defaultLongitude = 37.6174943
 
 async function requestCityWeather(city, apikey = '5efcd16ebd2a5605a8bebd21397f317e') {
-    let response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apikey}`)
+    let response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apikey}`)
     let responseJSON = await response.json()
     let responceLatitude = responseJSON[0].lat
     let responceLongitude = responseJSON[0].lon 
@@ -34,7 +34,7 @@ function error() {
 }
   
 async function getCurrentWeatherReport(latitude, longitude, apikey = '5efcd16ebd2a5605a8bebd21397f317e') {
-    let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}&units=metric`)
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}&units=metric`)
     let responseJSON = await response.json()
     const weatherReportCard = new WeatherReport(responseJSON.name, 
                                                 responseJSON.main.temp, 
@@ -51,7 +51,7 @@ async function getCurrentWeatherReport(latitude, longitude, apikey = '5efcd16ebd
   
   
 async function getDailyForecast (latitude, longitude, apikey = '5efcd16ebd2a5605a8bebd21397f317e') {
-    let response = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apikey}&units=metric`)
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apikey}&units=metric`)
     let responseJSON = await response.json()
     const weatherForecast = []
     const main = document.querySelector('main')
